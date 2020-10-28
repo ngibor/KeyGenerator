@@ -16,6 +16,7 @@ def integer_to_bytearray_converter(number):
 
 
 def hmac_drgb_update(data, k, v):
+
     if data is not None:
         v = v | 0x00 | data
 

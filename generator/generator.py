@@ -12,8 +12,7 @@ class BitGenerator:
 
     def generate(self, requested_no_of_bits):
         if requested_no_of_bits > 7000:
-            print('Too many bits requested')
-            return
+            raise Exception("Too many bits requested")
 
         if self.reseed_counter >= 10000:
             raise Exception("Reseed required")

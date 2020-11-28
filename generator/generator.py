@@ -4,6 +4,11 @@ import hmac
 from generator.generator_util import integer_to_bytearray_converter, hmac_drgb_update
 
 
+class ReseedException(Exception):
+    """Raised when reseed is required"""
+    pass
+
+
 class BitGenerator:
     def __init__(self, v, key, reseed_counter):
         self.reseed_counter = reseed_counter
@@ -15,7 +20,7 @@ class BitGenerator:
             raise Exception("Too many bits requested")
 
         if self.reseed_counter >= 10000:
-            raise Exception("Reseed required")
+            raise ReseedException("Reseed required")
         temp = '0'
         while len(temp) < requested_no_of_bits:
             key = integer_to_bytearray_converter(self.key)

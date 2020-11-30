@@ -16,7 +16,7 @@ class BitGenerator:
         self.v = v
 
     def generate(self, requested_no_of_bits):
-        if requested_no_of_bits > 7000:
+        if requested_no_of_bits > 7500:
             raise Exception("Too many bits requested")
 
         if self.reseed_counter >= 10000:
@@ -25,11 +25,10 @@ class BitGenerator:
         while len(temp) < requested_no_of_bits:
             key = integer_to_bytearray_converter(self.key)
             v = integer_to_bytearray_converter(self.v)
-
             v = hmac.new(key, v, hashlib.sha256).hexdigest()
-            self.v = int(''.join(format(ord(i), 'b') for i in v), 2)
-            temp = int(temp, 2) | self.v
-            temp = "{0:b}".format(temp)
+            self.v = ''.join(format(ord(i), 'b') for i in v)
+            temp = temp + self.v
+            self.v = int(self.v, 2)
 
         pseudorandom_bits = temp[:requested_no_of_bits]
         self.key, self.v = hmac_drgb_update(None, self.key, self.v)

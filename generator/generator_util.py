@@ -18,32 +18,31 @@ def integer_to_bytearray_converter(number):
 def hmac_drgb_update(data, k, v):
 
     if data is not None:
-        v = v | 0x00 | data
+        v = int("{0:b}".format(v) + '00000000' + "{0:b}".format(data), 2)
 
     k_as_bytes = integer_to_bytearray_converter(k)                       # potrebujeme bytearray v hmac
     v_as_bytes = integer_to_bytearray_converter(v)                       # potrebujeme bytearray v hmac
 
     k = hmac.new(k_as_bytes, v_as_bytes, hashlib.sha256).hexdigest()
 
-    k = int(''.join(format(ord(i), 'b') for i in k), 2)         # string to binary int
+    k = int(''.join(format(ord(i), 'b') for i in k), 2)         # hex string to int
     k_as_bytes = integer_to_bytearray_converter(k)                       # potrebujeme bytearray v hmac
 
     v = hmac.new(k_as_bytes, v_as_bytes, hashlib.sha256).hexdigest()
-    v = int(''.join(format(ord(i), 'b') for i in v), 2)         # string to binary in
+    v = int(''.join(format(ord(i), 'b') for i in v), 2)         # hex string to int
 
     if data is None:
         return k, v
 
-    v = v | 0x01 | data
+    v = int("{0:b}".format(v) + '00000001' + "{0:b}".format(data), 2)
 
     v_as_bytes = integer_to_bytearray_converter(v)                       # potrebujeme bytearray v hmac
 
     k = hmac.new(k_as_bytes, v_as_bytes, hashlib.sha256).hexdigest()   # hmac(k, v)
 
-    k = int(''.join(format(ord(i), 'b') for i in k), 2)       # string to binary int
+    k = int(''.join(format(ord(i), 'b') for i in k), 2)       # hex string to int
     k_as_bytes = integer_to_bytearray_converter(k)
 
     v = hmac.new(k_as_bytes, v_as_bytes, hashlib.sha256).hexdigest()
-    v = int(''.join(format(ord(i), 'b') for i in v), 2)       # string to binary int
-
+    v = int(''.join(format(ord(i), 'b') for i in v), 2)       # hex string to int
     return k, v

@@ -1,8 +1,3 @@
-import hashlib
-import hmac
-from hashlib import sha256
-from random import randint
-
 from generator.generator import BitGenerator
 from generator.generator_util import hmac_drgb_update
 
@@ -29,7 +24,11 @@ def instantiate_drgb(personalization_string, entropy):
 
 
 def hmac_drgb_instantiate_parameters(entropy, personalization):
-    seed_material = entropy | personalization
+
+    entropy = "{0:b}".format(entropy)
+    personalization = "{0:b}".format(personalization)
+    seed_material = entropy + personalization
+    seed_material = int(seed_material, 2)
 
     key = ""
     for i in range(256):         # outlen = 256 pro sha256

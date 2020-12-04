@@ -5,17 +5,8 @@ from generator.generator_util import hmac_drgb_update
 # inicializuje a vrati generator
 def instantiate_drgb(entropy):
 
-
-
-
-
     #  HMAC_DRBG_Instantiate_algorithm - 7 krok
     v, key, reseed_counter = hmac_drgb_instantiate_parameters(entropy)
-
-    print("# Generated parameters #")
-    print("  - V :", v)
-    print("  - Key:", key)
-    print("  - Reseed counter: ", reseed_counter)
 
     return BitGenerator(v, key, reseed_counter)
 

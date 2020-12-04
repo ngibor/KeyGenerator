@@ -50,7 +50,7 @@ def ask_key_len():
         elif input_text_menu == 4:
             return 512
         else:
-            print("Spatne zadane cislo")
+            print("     Spatne zadane cislo")
             continue
 
 
@@ -89,9 +89,9 @@ def print_key(key: str):
     FORMAT_TEXT = """ 
         Vyberte spusob formatovani
         **************************
-        stisknutím 1) Text
+        stisknutím 1) Binarni
         stisknutím 2) Decimalni
-        stisknutím 3) Hexadecimal
+        stisknutím 3) Hexadecimalni
     
         **************************
     """

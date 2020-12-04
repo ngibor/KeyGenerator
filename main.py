@@ -13,19 +13,6 @@ from tests.monobit import monobit
 from tests.spectral import spectral
 
 
-def get_entropy_input(min_len, max_len):
-    random_string = "some string " + str(randint(1000000, 2000000))
-    entropy = sha256(random_string.encode()).hexdigest()     # delka v bitech = 403, minimalne potrebujeme 380
-    entropy = ''.join(format(ord(i), 'b') for i in entropy)  # string hash to binary
-
-    if len(entropy) < min_len or len(entropy) > max_len:
-        raise Exception("Incorrect size of given entropy")
-
-    entropy = int(entropy, 2)  # binary string to integer
-    print('entropy in example', entropy)
-    return entropy
-
-
 def ask_key_len():
 
     while True:

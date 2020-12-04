@@ -15,7 +15,8 @@ def monobit(bin_data: str):
     sobs = count / math.sqrt(len(bin_data))
     p_val = scipy.special.erfc(math.fabs(sobs) / math.sqrt(2))
     if p_val > 0.01:
-        print(">> Monobit Test: PRESIEL (P val > 0.01) -->", p_val)
+        # print(">> Monobit Test: PRESIEL (P val > 0.01) -->", p_val)
+        return True
     else:
-        print(">> Monobit Test: NEPRESIEL (P val < 0.01)  -->  ", p_val)
-    return p_val
+        # print(">> Monobit Test: NEPRESIEL (P val < 0.01)  -->  ", p_val)
+        return False

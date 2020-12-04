@@ -23,7 +23,8 @@ def spectral(bin_data: str):
     d = (count_n1 - count_n0) / numpy.sqrt(n * 0.95 * 0.05 / 4)
     p_val = scipy.special.erfc(abs(d) / numpy.sqrt(2))
     if p_val > 0.01:
-        print(">> Spectral Test: PRESIEL (P val > 0.01) -->", p_val)
+        # print(">> Spectral Test: PRESIEL (P val > 0.01) -->", p_val)
+        return True
     else:
-        print(">> Spectral Test: NEPRESIEL (P val < 0.01)  -->  ", p_val)
-    return p_val
+        # print(">> Spectral Test: NEPRESIEL (P val < 0.01)  -->  ", p_val)
+        return False
